@@ -7,7 +7,7 @@ import type { ID } from "../src/types/id.js";
 import type BaseSymbol from "../src/symbolSet/bases/baseSymbol.js";
 import type BaseSymbolInfo from "../src/symbolSet/bases/baseSymbolInfo.js";
 
-type ClassAsParams<T extends abstract new (...args: any) => any> = Expand<
+type ClassAsParams<T extends abstract new (...args: never) => unknown> = Expand<
     Partial<InstanceType<T>>
 >;
 type Lenght = number | [number, number];
