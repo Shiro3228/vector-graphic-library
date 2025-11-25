@@ -1,1 +1,1 @@
-export { getSymbolSets, addSymbolSet, removeSymbolSet } from "./classes/SolutionBase.js";
+export * from "./classes/solution.js";
