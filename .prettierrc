@@ -3,5 +3,4 @@
     "quoteProps": "consistent",
     "arrowParens": "avoid",
     "experimentalTernaries": true
-
 }

@@ -1,1 +1,1 @@
-export * from "./classes/solution.js";
+export { default as Solution } from "./classes/solution.js";
