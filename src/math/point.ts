@@ -15,7 +15,7 @@ export default class Point {
         return new Vector(dx * scale, dy * scale);
     }
 
-    public towards(point: Point, factor: number = 0.5): Point {
+    public towards(point: Point, factor: number = 1.0): Point {
         const dx = point.x - this.x;
         const dy = point.y - this.y;
         return new Point(this.x + dx * factor, this.y + dy * factor);
