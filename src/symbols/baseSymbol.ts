@@ -3,7 +3,8 @@ import type Point from "../math/point.js";
 import type { ID } from "../types/id.js";
 
 export type BaseSymbolOptions = {
-    color: string;
+    color?: string | undefined;
+    [key: string]: unknown;
 };
 
 export default abstract class BaseSymbol<
