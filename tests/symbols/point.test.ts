@@ -44,10 +44,10 @@ describe("Point Symbol", () => {
 
     it("instance getSymbol() delegates to static getSymbol()", () => {
         const base = new SymbolPoint([p0]);
-        const sym = base.getSymbol([p0, p1], { color: "red" });
+        const sym = base.getSymbol([p0], { color: "red" });
 
         expect(sym).toBeInstanceOf(SymbolPoint);
-        expect(sym.points).toEqual([p0, p1]);
+        expect(sym.points).toEqual([p0]);
         expect(sym.options).toEqual({ color: "red" });
     });
 

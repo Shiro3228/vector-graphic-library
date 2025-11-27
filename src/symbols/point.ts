@@ -10,12 +10,10 @@ export default class Point<
 > extends BaseSymbol<TOptions> {
     static override id: ID = "point";
     static override name: string = "Primitive Point";
-    override minPoints: number = 1;
-    override maxPoints: number = 1;
     override options?: TOptions;
 
     constructor(points: MathPoint[], options?: TOptions | undefined) {
-        super(points);
+        super(points, options, 1, 1);
         if (options) this.options = options;
         else delete this.options;
     }

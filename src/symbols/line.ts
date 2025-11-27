@@ -1,12 +1,13 @@
+import type { SymbolPoints } from "../interfaces/isymbol.js";
 import type ISymbol from "../interfaces/isymbol.js";
 import type Point from "../math/point.js";
 import BaseSymbol, { type BaseSymbolOptions } from "./baseSymbol.js";
 
-enum BodyType {
+export enum BodyType {
     REGULAR = "REGULAR",
 }
 
-type LineOptions = BaseSymbolOptions & {
+export type LineOptions = BaseSymbolOptions & {
     border: BodyType;
 };
 
@@ -15,12 +16,10 @@ export default class Line<
 > extends BaseSymbol<TOptions> {
     static override id = "line";
     static override name: string = "Primitive Line";
-    override minPoints: number = 2;
-    override maxPoints: number = Number.MAX_SAFE_INTEGER;
     override options?: TOptions;
 
-    constructor(points: Point[], options?: TOptions | undefined) {
-        super(points);
+    constructor(points: SymbolPoints, options?: TOptions | undefined) {
+        super(points, options, 2, Number.MAX_SAFE_INTEGER);
         if (options) this.options = options;
         else delete this.options;
     }
