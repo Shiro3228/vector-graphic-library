@@ -1,9 +1,9 @@
 import type ISymbol from "../interfaces/isymbol.js";
 import { default as MathPoint } from "../math/point.js";
 import type { ID } from "../types/id.js";
-import BaseSymbol from "./baseSymbol.js";
+import BaseSymbol, { type BaseSymbolOptions } from "./baseSymbol.js";
 
-type PointOptions = object;
+type PointOptions = BaseSymbolOptions & {};
 
 export default class Point<
     TOptions extends PointOptions = PointOptions,

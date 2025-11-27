@@ -1,12 +1,12 @@
 import type ISymbol from "../interfaces/isymbol.js";
 import type Point from "../math/point.js";
-import BaseSymbol from "./baseSymbol.js";
+import BaseSymbol, { type BaseSymbolOptions } from "./baseSymbol.js";
 
 enum BodyType {
     REGULAR = "REGULAR",
 }
 
-type LineOptions = {
+type LineOptions = BaseSymbolOptions & {
     border: BodyType;
 };
 

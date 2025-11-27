@@ -2,8 +2,13 @@ import type ISymbol from "../interfaces/isymbol.js";
 import type Point from "../math/point.js";
 import type { ID } from "../types/id.js";
 
-export default abstract class BaseSymbol<TOptions extends object>
-    implements ISymbol<TOptions>
+export type BaseSymbolOptions = {
+    color: string;
+};
+
+export default abstract class BaseSymbol<
+    TOptions extends BaseSymbolOptions = BaseSymbolOptions,
+> implements ISymbol<TOptions>
 {
     static id: ID;
     static name: string;
