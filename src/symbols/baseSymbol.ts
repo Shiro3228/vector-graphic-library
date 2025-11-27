@@ -53,5 +53,6 @@ export default abstract class BaseSymbol<TOptions extends object>
     }
 
     abstract getSymbol(points: Point[], options?: TOptions): ISymbol<TOptions>;
+
     abstract normalize(): ISymbol[];
 }
