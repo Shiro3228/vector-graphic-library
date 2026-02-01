@@ -1,6 +1,16 @@
 import { describe, expect, it, vi } from "vitest";
 import Point from "../src/math/point.js";
 import Vector from "../src/math/vector.js";
+import { faker } from "@faker-js/faker";
+
+const randNum = () =>
+    faker.number.int({
+        min: Number.MIN_SAFE_INTEGER,
+        max: Number.MAX_SAFE_INTEGER,
+    });
+
+const randPoint = () => new Point(randNum(), randNum());
+const randVector = () => new Vector(randNum(), randNum());
 
 describe("Point", () => {
     it("stores x and y", () => {
@@ -40,70 +50,72 @@ describe("Point", () => {
 
     describe("to()", () => {
         it("creates a vector pointing to target", () => {
-            const p1 = new Point(0, 0);
-            const p2 = new Point(4, 3);
+            const p1 = randPoint();
+            const p2 = randPoint();
 
             const v = p1.to(p2);
 
             expect(v).toBeInstanceOf(Vector);
-            expect(v.dx).toBe(4);
-            expect(v.dy).toBe(3);
+            expect(v.dx).toBe(p2.x - p1.x);
+            expect(v.dy).toBe(p2.y - p1.y);
         });
 
         it("applies scale correctly", () => {
-            const p1 = new Point(1, 1);
-            const p2 = new Point(5, 5);
-            const v = p1.to(p2, 0.5);
+            const p1 = randPoint();
+            const p2 = randPoint();
+            const scale = 0.5;
+            const v = p1.to(p2, scale);
 
-            // (5 - 1) * 0.5
-            expect(v.dx).toBe(2);
-            expect(v.dy).toBe(2);
+            expect(v.dx).toBe((p2.x - p1.x) * scale);
+            expect(v.dy).toBe((p2.y - p1.y) * scale);
         });
     });
 
     describe("towards()", () => {
-        it("returns a point halfway by default", () => {
-            const p1 = new Point(0, 0);
-            const p2 = new Point(4, 4);
+        it("returns an end point by default", () => {
+            const p1 = randPoint();
+            const p2 = randPoint();
 
             const p = p1.towards(p2);
 
             expect(p).toBeInstanceOf(Point);
-            expect(p.x).toBe(4);
-            expect(p.y).toBe(4);
+            expect(p.x).toBe(p2.x);
+            expect(p.y).toBe(p2.y);
         });
 
         it("returns a point at arbitrary factor", () => {
-            const p1 = new Point(10, 10);
-            const p2 = new Point(20, 30);
+            const p1 = randPoint();
+            const p2 = randPoint();
 
-            const p = p1.towards(p2, 0.25);
+            const scale = 0.25;
+            const p = p1.towards(p2, scale);
 
-            expect(p.x).toBe(12.5);
-            expect(p.y).toBe(15);
+            expect(p.x).toBe(p1.x + (p2.x - p1.x) * scale);
+            expect(p.y).toBe(p1.y + (p2.y - p1.y) * scale);
         });
     });
 
     describe("translate()", () => {
         it("returns translated point", () => {
-            const p = new Point(3, 4);
-            const v = new Vector(10, -2);
+            const p = randPoint();
+            const v = randVector();
 
             const p2 = p.translate(v);
 
             expect(p2).toBeInstanceOf(Point);
-            expect(p2.x).toBe(13);
-            expect(p2.y).toBe(2);
+            expect(p2.x).toBe(p.x + v.dx);
+            expect(p2.y).toBe(p.y + v.dy);
         });
 
         it("applies scale correctly", () => {
-            const p = new Point(0, 0);
-            const v = new Vector(4, 6);
+            const p = randPoint();
+            const v = randVector();
 
-            const p2 = p.translate(v, 0.5);
+            const scale = 0.5;
+            const p2 = p.translate(v, scale);
 
-            expect(p2.x).toBe(2);
-            expect(p2.y).toBe(3);
+            expect(p2.x).toBe(p.x + v.dx * scale);
+            expect(p2.y).toBe(p.y + v.dy * scale);
         });
     });
 });
