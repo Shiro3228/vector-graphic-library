@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import Point from "../src/math/point.js";
 import Vector from "../src/math/vector.js";
 
@@ -7,6 +7,35 @@ describe("Point", () => {
         const p = new Point(3, 7);
         expect(p.x).toBe(3);
         expect(p.y).toBe(7);
+    });
+
+    describe("equals()", () => {
+        it("static method works", () => {
+            const p1 = new Point(3, 7);
+            const p2 = new Point(3, 7);
+            expect(Point.equals(p1, p2)).toBe(true);
+            expect(p1 === p2).toBeFalsy();
+        });
+
+        it("works", () => {
+            const p1 = new Point(3, 7);
+            const p2 = new Point(3, 7);
+            expect(p1.equals(p2)).toBe(true);
+            expect(p1 === p2).toBeFalsy();
+        });
+
+        it("calls static method", () => {
+            const p1 = new Point(3, 7);
+            const p2 = new Point(3, 7);
+            const spy = vi.spyOn(Point, "equals");
+
+            p1.equals(p2);
+            expect(spy).toHaveBeenCalledOnce();
+            p1.equals(p2);
+            expect(spy).toHaveBeenCalledTimes(2);
+            Point.equals(p1, p2);
+            expect(spy).toHaveBeenCalledTimes(3);
+        });
     });
 
     describe("to()", () => {

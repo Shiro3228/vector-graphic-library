@@ -24,4 +24,11 @@ export default class Point {
     public translate(vec: Vector, scale: number = 1.0): Point {
         return new Point(this.x + vec.dx * scale, this.y + vec.dy * scale);
     }
+
+    public static equals(a: Point, b: Point): boolean {
+        return a.x === b.x && a.y === b.y;
+    }
+    public equals(other: Point): boolean {
+        return Point.equals(this, other);
+    }
 }
