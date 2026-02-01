@@ -3,9 +3,17 @@ import type ISymbol from "../interfaces/isymbol.js";
 import type Point from "../math/point.js";
 import BaseSymbol, { type BaseSymbolOptions } from "./baseSymbol.js";
 
-export enum BodyType {
-    REGULAR = "REGULAR",
+export interface BodyTypeMap {
+    REGULAR: "REGULAR";
+    DASHED: "DASHED";
 }
+
+export const BodyType: BodyTypeMap = {
+    REGULAR: "REGULAR",
+    DASHED: "DASHED",
+};
+
+export type BodyType = BodyTypeMap[keyof BodyTypeMap];
 
 export type LineOptions = BaseSymbolOptions & {
     border: BodyType;
