@@ -4,7 +4,6 @@ import SymbolPoint from "../../src/symbols/point.js";
 
 describe("Point Symbol", () => {
     const p0 = new MathPoint(0, 0);
-    const p1 = new MathPoint(1, 1);
 
     it("creates a Point with no options", () => {
         const sym = new SymbolPoint([p0]);
