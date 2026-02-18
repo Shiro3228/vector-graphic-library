@@ -47,7 +47,7 @@ describe("class Sidc", () => {
             it("version", () => {
                 checkFunck(
                     "version",
-                    14,
+                    SidcVersion.APP_6E_1,
                     code => code.substring(0, 2) === "14",
                 );
             });
@@ -99,6 +99,55 @@ describe("class Sidc", () => {
                     code => code.substring(8, 10) === "51",
                 );
             });
+        });
+    });
+
+    describe("it understands each", () => {
+        const checkFunck = <
+            T extends NonFunctionPropertyNames<Sidc>,
+            TEnum extends Record<string, string | number>,
+        >(
+            dict: TEnum,
+            key: T,
+            expectedLen: number,
+        ) => {
+            const values = Object.values(dict).filter(
+                e => Number(e) || e === 0,
+            );
+            expect(values.length).toBe(expectedLen);
+
+            values.forEach(value => {
+                const uut = sidc.copy({ [key]: value });
+                expect(uut[key]).toBe(value);
+            });
+        };
+
+        it("version", () => {
+            checkFunck(SidcVersion, "version", 5);
+        });
+
+        it("context", () => {
+            checkFunck(SidcContext, "context", 9);
+        });
+
+        it("identity", () => {
+            checkFunck(SidcStandardIdentity, "identity", 7);
+        });
+
+        it("symbolSet", () => {
+            checkFunck(SidcSymbolSet, "symbolSet", 32);
+        });
+
+        it("status", () => {
+            checkFunck(SidcStatus, "status", 6);
+        });
+
+        it("taskForce", () => {
+            checkFunck(SidcTaskForce, "taskForce", 8);
+        });
+
+        it("amplifier", () => {
+            checkFunck(SidcAmplifier, "amplifier", 29);
         });
     });
 });
