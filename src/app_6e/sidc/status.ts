@@ -1,0 +1,10 @@
+enum SidcStatus {
+    PRESENT = 0,
+    PLANNED_OR_ANTICIPATED_OR_SUSPECT = 1,
+    PRESENT_OR_FULLY_CAPABLE = 2,
+    PRESENT_OR_DAMAGED = 3,
+    PRESENT_OR_DESTROYED = 4,
+    PRESENT_OR_FULL_TO_CAPACITY = 5,
+}
+
+export default SidcStatus;
